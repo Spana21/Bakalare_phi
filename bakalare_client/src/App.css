@@ -1,0 +1,559 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+/* --- RESET --- */
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- POZADÍ (Jemný pastelový přechod jako v referenci) --- */
+.eduportal-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/pozadi.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}
+
+.eduportal-content {
+  width: 100%;
+  max-width: 400px; /* Úzký sloupec přesně jako předloha */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HLAVIČKA A LOGO --- */
+.eduportal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.eduportal-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.brand-icon-bg {
+  background-color: #0ea5e9; /* Modrá barva loga */
+  border-radius: 8px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.real-logo-img {
+  height: 55px;
+  margin-bottom: 10px;
+}
+
+.school-name {
+  color: #555555;
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 35px 0 0px;
+}
+
+/* --- PŘIHLAŠOVACÍ KARTA --- */
+.eduportal-card {
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0,0,0,0.1);
+  padding: 30px;
+  position: relative;
+  border: 1px solid #f1f5f9;
+}
+
+/* Modrá ikonka v pravém horním rohu jako u předlohy */
+.info-icon-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.eduportal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.input-group input::placeholder {
+  color: #94a3b8;
+  font-style: italic; /* Typické pro některé starší školní systémy */
+}
+
+.input-group input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.1);
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: -5px;
+}
+
+.forgot-password a {
+  font-size: 12px;
+  color: #64748b;
+  text-decoration: none;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 1px;
+}
+
+.forgot-password a:hover {
+  color: #334155;
+  border-bottom-color: #334155;
+}
+
+/* Typické zelené tlačítko */
+.login-btn {
+  background-color: #65a30d; /* Světlá, výrazná zelená */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #4d7c0f;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* --- PATIČKA S APLIKACEMI --- */
+.eduportal-footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.eduportal-footer p {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.app-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.store-badge:hover {
+  transform: scale(1.05); /* Lehké zvětšení po najetí myší */
+}
+
+/* =========================================
+   5. MODÁLNÍ OKNO
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  padding: 50px;
+  border: 1px solid #10b981; 
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15); 
+  
+  width: 95%;
+  max-width: 1550px; /* width win */
+  
+  height: auto;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-content h3 {
+  font-size: 2.2rem;
+  color: #10b981; 
+  margin-bottom: 25px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.modal-info-section {
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.modal-text {
+  font-size: 1.15rem;
+  color: #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.github-info {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin-bottom: 25px;
+}
+
+.github-link {
+  color: #10b981;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+  transition: all 0.2s;
+}
+
+.github-link:hover {
+  color: #34d399;
+  border-bottom-color: #34d399;
+}
+
+/* Sekce se zárukou bezpečnosti */
+.security-guarantee {
+  background: rgba(16, 185, 129, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  text-align: left;
+  margin: 25px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.security-guarantee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #10b981;
+}
+
+.security-guarantee h4 {
+  color: #10b981;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.security-guarantee p {
+  font-size: 1.05rem;
+  color: #d1fae5;
+  line-height: 1.6;
+}
+
+/* Edukační sekce */
+.education-section {
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.education-section h4 {
+  color: #f1f5f9;
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.edu-list {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .edu-list { grid-template-columns: 1fr; }
+}
+
+.edu-list li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 1rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+.edu-list li::before {
+  content: "🛡️";
+  position: absolute;
+  left: 0;
+  font-size: 1.1rem;
+}
+
+.modal-divider {
+  border: none;
+  border-top: 1px solid #334155;
+  margin: 30px 0;
+  width: 100%;
+}
+
+/* Výběr věku v modálu */
+.age-selection-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  color: #f1f5f9;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.modal-select {
+  width: 100%;
+  max-width: 450px;
+  padding: 14px 20px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2310b981%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-13%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2013l128%20128c3.6%203.6%207.8%205.4%2013%205.4s9.3-1.8%2013-5.4l128-128c3.5-3.6%205.4-7.8%205.4-13%200-5-3.5-9.3-5.4-13z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px top 50%;
+  background-size: 12px auto;
+}
+
+.modal-select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* Souhlas */
+.agreement-wrapper {
+  margin-bottom: 30px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  width: 22px;
+  height: 22px;
+  accent-color: #10b981;
+}
+
+/* Footer a tlačítko */
+.modal-footer {
+  margin-top: auto;
+}
+
+.small-note {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  background-color: #10b981;
+  color: #000; /* Černé písmo */
+  border: none;
+  padding: 18px 60px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+}
+
+.close-btn:hover:not(:disabled) {
+  background-color: #34d399;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+}
+
+.close-btn:disabled {
+  background-color: #1e293b;
+  color: #475569;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Sekce kontaktů v modálu */
+.contact-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s;
+}
+
+.contact-card:hover {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.contact-card h5 {
+  color: #34d399;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.contact-item a {
+  color: #f1f5f9;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-item a:hover {
+  color: #34d399;
+}
+@media (max-width: 650px) {
+
+
+  /* --- 2. ČERNÉ MODÁLNÍ OKNO PRO DIPLOMKU --- */
+  
+  .modal-content {
+    /* Z původních obřích 50px zmenšíme okraje na 15px */
+    padding: 25px 15px; 
+    border-radius: 16px;
+    width: 100%;
+    max-height: 95vh;
+  }
+
+  .modal-content h3 {
+    font-size: 1.5rem; /* Menší hlavní nadpis */
+    margin-bottom: 15px;
+  }
+
+  .modal-text {
+    font-size: 1rem;
+  }
+
+  .security-guarantee {
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 12px;
+  }
+
+  .security-guarantee h4 {
+    font-size: 1.1rem;
+  }
+
+  .security-guarantee p {
+    font-size: 0.95rem;
+  }
+
+  .education-section h4 {
+    font-size: 1.1rem;
+  }
+
+  .edu-list li {
+    font-size: 0.95rem;
+    padding-left: 25px;
+  }
+
+  /* Kontakty pod sebou */
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .contact-card {
+    padding: 15px;
+  }
+
+  /* Tlačítko pro stažení - na celou šířku obrazovky */
+  .close-btn {
+    padding: 15px 20px;
+    width: 100%;
+    font-size: 1rem;
+  }
+  
+  /* Checkbox souhlasu na mobilu lehce zmenšíme */
+  .checkbox-container {
+    font-size: 1rem;
+    align-items: flex-start; /* Zarovnání nahoru, kdyby text skočil na 2 řádky */
+    text-align: left;
+  }
+}
