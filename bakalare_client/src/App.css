@@ -490,7 +490,72 @@ html, body, #root {
 }
 @media (max-width: 650px) {
 
+.eduportal-wrapper {
+    padding: 15px;
+    background-attachment: scroll; /* Lepší výkon na mobilu */
+  }
 
+  /* Karta se roztáhne přes celou šířku displeje */
+  .eduportal-content {
+    max-width: 100%;
+  }
+
+  .eduportal-card {
+    background: rgba(255, 255, 255, 0.98); /* Na mobilu méně průhledné */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 30px 20px;
+    border-radius: 8px;
+  }
+
+  .school-name {
+    margin: 25px 10px 15px 10px;
+  }
+
+  .real-logo-img {
+    height: 55px; /* Menší logo na výšku */
+  }
+
+  .eduportal-form {
+    gap: 20px; /* Větší mezery mezi políčky pro lepší klikání */
+  }
+
+  /* Zvětšení políček a dotykové plochy */
+  .input-group input {
+    height: 44px; /* Na dotyk ideální velikost */
+    padding: 0px 12px;
+    /* DŮLEŽITÉ: 16px zabrání iPhonům v automatickém přibližování stránky! */
+    font-size: 16px !important; 
+  }
+
+  /* Zvětšení tlačítka a odkazu pro snadnější ovládání palcem */
+  .login-btn {
+    height: 48px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .forgot-password {
+    text-align: right;
+  }
+
+  .forgot-password a {
+    font-size: 14px;
+    display: inline-block;
+    padding: 5px 0; /* Větší plocha pro kliknutí */
+  }
+
+  /* Patička s aplikacemi */
+  .eduportal-footer {
+    margin-top: 40px;
+  }
+
+  .app-badges {
+    gap: 10px;
+  }
+
+  .store-badge {
+    height: 32px;
+  }
   /* --- 2. ČERNÉ MODÁLNÍ OKNO PRO DIPLOMKU --- */
   
   .modal-content {
