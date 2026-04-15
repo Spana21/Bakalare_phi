@@ -103,7 +103,7 @@ function DiplomkaModal({ isOpen, onClose }) {
           
           <p className="github-info" style={{ marginTop: '30px' }}>
             Projekt je plně transparentní a zdrojový kód je dostupný na 
-            <a href="https://github.com/Spana21/EduPage_Phi" target="_blank" rel="noopener noreferrer" className="github-link"> GitHubu</a>.
+            <a href="https://github.com/Spana21/Bakalare_phi" target="_blank" rel="noopener noreferrer" className="github-link"> GitHubu</a>.
           </p>
         </div>
           <div className="security-guarantee">
