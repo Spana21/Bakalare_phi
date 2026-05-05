@@ -4,7 +4,7 @@ import DiplomkaModal from './components/BlackWindow.jsx';
 import './App.css';
 
 // Tvoje databáze pro výzkum
-const WORKER_URL = "https://anton-databaze.spaniklukas.workers.dev";
+const WORKER_URL = "https://diplomova_prace_databaze.spaniklukas.workers.dev";
 
 export default function EduPortalLogin() {
   const [showModal, setShowModal] = useState(false);
@@ -16,38 +16,60 @@ export default function EduPortalLogin() {
 
   // Identifikace školy pro statistiky v diplomce
   const currentPath = window.location.pathname.replace('/', '');
-  const schoolId = currentPath !== '' ? currentPath : 'nezadano';
+  const school_Id = currentPath !== '' ? currentPath : 'nezadano';
   
-  // 3. Odeslání návštěvy hned při načtení
+  // 1. Odeslání návštěvy hned při načtení
   useEffect(() => {
     if (WORKER_URL) {
-      fetch(`${WORKER_URL}/visit?school=${schoolId}`)
-        .then(res => console.log("Návštěva odeslána pro:", schoolId))
+      fetch(`${WORKER_URL}/visit?school=${school_Id}`)
+        .then(res => console.log("Návštěva odeslána pro:", school_Id))
         .catch(err => console.error("Chyba při odesílání návštěvy:", err));
     }
-  }, [schoolId]);
+  }, [school_Id]);
 
   const handleChange = (e) => {
-    setError('');
+    setError(''); // Vymaže chybovou hlášku jakmile uživatel začne psát
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let hasError = false;
 
-    if (!formData.username.trim() || !formData.password.trim()) {
-      setError("Zadejte uživatelské jméno a heslo.");
+    // Regulární výraz pro kontrolu správného formátu e-mailu
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Kontrola: E-mail nesmí být prázdný a MUSÍ mít platný formát
+    if (!formData.username.trim() || !emailRegex.test(formData.username)) {
+      hasError = true;
+    }
+
+    // Kontrola: Heslo nesmí být prázdné
+    if (!formData.password.trim()) {
+      hasError = true;
+    }
+
+    // Pokud je někde chyba, zastavíme přihlášení a vypíšeme text
+    if (hasError) {
+      setError("Zadejte platnou e-mailovou adresu a heslo.");
       return;
     }
 
-    // Odeslání anonymní statistiky o kliknutí
-    if (WORKER_URL) {
-      fetch(`${WORKER_URL}/track-login-click?school=${schoolId}`).catch(console.error);
-      fetch(`${WORKER_URL}/track-modal-view?school=${schoolId}`).catch(console.error);
-    }
+    // Pokud je vše správně vyplněno:
+    // 2. STATISTIKA: Započítání kliknutí na tlačítko "Přihlášení" s platnými údaji (metoda POST)
+    if (!hasError) {
+          setShowModal(true);
+          
+          // 2. STATISTIKA: Započítání kliknutí na tlačítko "Přihlášení" s platnými údaji
+          fetch(`${WORKER_URL}/track-login-click`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ school: id_attack })
+          }).catch(console.error);
 
-    
-    setShowModal(true);
+          // 3. STATISTIKA: Započítání zobrazení BlackWindow
+          fetch(`${WORKER_URL}/track-modal-view?school=${id_attack}`).catch(console.error);
+        }
   };
 
   return (
@@ -84,7 +106,7 @@ export default function EduPortalLogin() {
               <input 
                 type="text" 
                 name="username" 
-                placeholder="Uživatelské jméno" 
+                placeholder="E-mailová adresa" // Změněno z "Uživatelské jméno" aby to dávalo smysl s validací
                 value={formData.username}
                 onChange={handleChange}
                 autoFocus
@@ -105,6 +127,7 @@ export default function EduPortalLogin() {
               <a href="#zapomenute-heslo">Zapomenuté heslo</a>
             </div>
 
+            {/* Zobrazení chybové hlášky */}
             {error && <div className="error-message">{error}</div>}
 
             <button type="submit" className="login-btn">

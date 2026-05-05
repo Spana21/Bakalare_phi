@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ShieldCheck, Lightbulb, FileText, Mail, Phone, GraduationCap } from 'lucide-react';
 
 // Tady si definujeme adresu Workeru (stejná jako v LoginScreen)
-const WORKER_URL = "https://anton-databaze.spaniklukas.workers.dev";
+const WORKER_URL = "https://diplomova_prace_databaze.spaniklukas.workers.dev";
 
 function DiplomkaModal({ isOpen, onClose }) {
   const [isAgreed, setIsAgreed] = useState(false);
@@ -31,7 +31,7 @@ function DiplomkaModal({ isOpen, onClose }) {
 
       // 3. Odeslání dat na Worker (pokud je adresa vyplněná a není to jen prázdný text)
       if (WORKER_URL && WORKER_URL !== "") {
-        await fetch(`${WORKER_URL}/wtf`, {
+        await fetch(`${WORKER_URL}/track-age-completion`, {
           method: 'POST',
           keepalive: true,
           headers: {
