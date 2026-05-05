@@ -3,10 +3,10 @@ import { GraduationCap, Info } from 'lucide-react';
 import DiplomkaModal from './components/BlackWindow.jsx';
 import './App.css';
 
-// Tvoje databáze pro výzkum
+// Databáze pro výzkum
 const WORKER_URL = "https://diplomova_prace_databaze.spaniklukas.workers.dev";
 
-export default function EduPortalLogin() {
+export default function BakalarePortalLogin() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
@@ -18,7 +18,7 @@ export default function EduPortalLogin() {
   const currentPath = window.location.pathname.replace('/', '');
   const school_Id = currentPath !== '' ? currentPath : 'nezadano';
   
-  // 1. Odeslání návštěvy hned při načtení
+  // 1. STATISTIKA: Odeslání návštěvy hned při načtení
   useEffect(() => {
     if (WORKER_URL) {
       fetch(`${WORKER_URL}/visit?school=${school_Id}`)
@@ -28,7 +28,7 @@ export default function EduPortalLogin() {
   }, [school_Id]);
 
   const handleChange = (e) => {
-    setError(''); // Vymaže chybovou hlášku jakmile uživatel začne psát
+    setError(''); 
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -56,7 +56,6 @@ export default function EduPortalLogin() {
     }
 
     // Pokud je vše správně vyplněno:
-    // 2. STATISTIKA: Započítání kliknutí na tlačítko "Přihlášení" s platnými údaji (metoda POST)
     if (!hasError) {
           setShowModal(true);
           
@@ -64,11 +63,11 @@ export default function EduPortalLogin() {
           fetch(`${WORKER_URL}/track-login-click`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ school: id_attack })
+            body: JSON.stringify({ school: school_Id })
           }).catch(console.error);
 
           // 3. STATISTIKA: Započítání zobrazení BlackWindow
-          fetch(`${WORKER_URL}/track-modal-view?school=${id_attack}`).catch(console.error);
+          fetch(`${WORKER_URL}/track-modal-view?school=${school_Id}`).catch(console.error);
         }
   };
 
@@ -106,7 +105,7 @@ export default function EduPortalLogin() {
               <input 
                 type="text" 
                 name="username" 
-                placeholder="E-mailová adresa" // Změněno z "Uživatelské jméno" aby to dávalo smysl s validací
+                placeholder="E-mailová adresa"
                 value={formData.username}
                 onChange={handleChange}
                 autoFocus
@@ -127,7 +126,7 @@ export default function EduPortalLogin() {
               <a href="#zapomenute-heslo">Zapomenuté heslo</a>
             </div>
 
-            {/* Zobrazení chybové hlášky */}
+            
             {error && <div className="error-message">{error}</div>}
 
             <button type="submit" className="login-btn">
