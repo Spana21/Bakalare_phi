@@ -3,7 +3,6 @@ import { GraduationCap, Info } from 'lucide-react';
 import DiplomkaModal from './components/BlackWindow.jsx';
 import './App.css';
 
-// Databáze pro výzkum
 const WORKER_URL = "https://diplomova_prace_databaze.spaniklukas.workers.dev";
 
 export default function BakalarePortalLogin() {
@@ -14,7 +13,7 @@ export default function BakalarePortalLogin() {
   });
   const [error, setError] = useState('');
 
-  // Identifikace školy pro statistiky v diplomce
+  //  Získání identifikátoru z URL
   const currentPath = window.location.pathname.replace('/', '');
   const school_Id = currentPath !== '' ? currentPath : 'nezadano';
   
@@ -49,7 +48,6 @@ export default function BakalarePortalLogin() {
       hasError = true;
     }
 
-    // Pokud je někde chyba, zastavíme přihlášení a vypíšeme text
     if (hasError) {
       setError("Zadejte platnou e-mailovou adresu a heslo.");
       return;
